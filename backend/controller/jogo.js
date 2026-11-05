@@ -1,12 +1,12 @@
-import ServiceUser from '../service/user.js'
+import ServiceJogo from '../service/jogo.js'
 
-class ControllerUser {
+class ControllerJogo {
 
     async Buscar(req, res) {
         try {
-            const users = await ServiceUser.Buscar()
+            const jogo = await ServiceJogo.Buscar()
 
-            res.status(200).send({ users })
+            res.status(200).send({ jogo })
         } catch (error) {
             res.status(500).send({ message: error.message })
         }
@@ -16,9 +16,9 @@ class ControllerUser {
         try {
             // session === usuario logado
             const id = req.session.id
-            const user = await ServiceUser.Detalhe(id)
+            const jogo = await ServiceJogo.Detalhe(id)
 
-            res.status(200).send({ user })
+            res.status(200).send({ jogo })
         } catch (error) {
             res.status(500).send({ message: error.message })
         }
@@ -28,7 +28,7 @@ class ControllerUser {
         try {
             const { name, email, password } = req.body
 
-            await ServiceUser.Criar(name, email, password)
+            await ServiceJogo.Criar(name, email, password)
 
             res.status(201).send({ message: "Usuário criado com sucesso!" })
         } catch (error) {
@@ -41,7 +41,7 @@ class ControllerUser {
             const id = req.session.id
             const { name, email, password } = req.body
 
-            await ServiceUser.Alterar(id, name, email, password)
+            await ServiceJogo.Alterar(id, name, email, password)
         
             res.status(200).send({ message: "Usuário alterado com sucesso!" })
         } catch (error) {
@@ -53,7 +53,7 @@ class ControllerUser {
         try {
             const id = req.session.id
 
-            await ServiceUser.Deletar(id)
+            await ServiceJogo.Deletar(id)
 
             res.status(204).send({ message: "Usuário deletado com sucesso!" })
         } catch (error) {
@@ -65,7 +65,7 @@ class ControllerUser {
         try {
             const { email, password } = req.body
     
-            const token = await ServiceUser.Login(email, password)
+            const token = await ServiceJogo.Login(email, password)
 
             res.status(200).send({ token })
         } catch (error) {
@@ -73,4 +73,4 @@ class ControllerUser {
         }
     }
 }
-export default new ControllerUser()
+export default new ControllerJogo()

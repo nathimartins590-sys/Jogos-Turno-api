@@ -1,14 +1,15 @@
-import RepositoryUser from '../repository/user.js'
+import RepositoryJogo from '../repository/jogo.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 const SECRET = 'batata123'
 const SALT = 12
 
-class ServiceUser {
+class ServiceJogo {
 
     async Buscar() {
-        return RepositoryUser.Buscar()
+        return RepositoryJogo
+    .Buscar()
     }
 
     async Detalhe(id) {
@@ -16,7 +17,8 @@ class ServiceUser {
             throw new Error("Favor informar o ID")
         }
 
-        return RepositoryUser.Detalhe(id)
+        return RepositoryJogo
+    .Detalhe(id)
     }
 
     async Criar(name, email, password) {
@@ -26,7 +28,8 @@ class ServiceUser {
 
         const cryptPass = await bcrypt.hash(password, SALT)
 
-        await RepositoryUser.Criar(name, email, cryptPass)
+        await RepositoryJogo
+    .Criar(name, email, cryptPass)
     }
 
     async Alterar(id, name, email, password) {
@@ -38,7 +41,8 @@ class ServiceUser {
             ? undefined
             : await bcrypt.hash(password, SALT)
 
-        await RepositoryUser.Alterar(id, name, email, cryptPass)
+        await RepositoryJogo
+    .Alterar(id, name, email, cryptPass)
     }
 
     async Deletar(id) {
@@ -46,7 +50,8 @@ class ServiceUser {
             throw new Error("Favor informar o ID")
         }
 
-        await RepositoryUser.Deletar(id)
+        await RepositoryJogo
+    .Deletar(id)
     }
 
     async Login(email, password) {
@@ -54,11 +59,15 @@ class ServiceUser {
             throw new Error("Email ou senha inválido")
         }
 
-        const user = await RepositoryUser.BuscarEmail(email)
+        const Jogo
+     = await RepositoryJogo
+    .BuscarEmail(email)
 
         if(
-            !user 
-            || !(await bcrypt.compare(String(password), user.password))
+            !Jogo
+         
+            || !(await bcrypt.compare(String(password), Jogo
+        .password))
         ){
             throw new Error("Email ou senha inválido")
         }
@@ -66,8 +75,10 @@ class ServiceUser {
         // token
         return jwt.sign(
             {
-                id: user.id,
-                email: user.email
+                id: Jogo
+            .id,
+                email: Jogo
+            .email
             },
             SECRET,
             {
@@ -78,4 +89,4 @@ class ServiceUser {
 
 }
 
-export default new ServiceUser()
+export default new ServiceJogo()

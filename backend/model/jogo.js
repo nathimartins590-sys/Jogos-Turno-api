@@ -1,22 +1,22 @@
 import database from "../config/database.js";
 
-class User {
+class Jogo {
     constructor() {
-        this.model = database.db.define("user", {
+        this.model = database.db.define("jogo", {
             id: {
                 type: database.db.Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true
             },
-            name: {
+            descricao: {
                 type: database.db.Sequelize.STRING,
                 allowNull: false
             },
-            password: {
+            data: {
                 type: database.db.Sequelize.STRING,
                 allowNull: false
             },
-            email: {
+            vencedor: {
                 type: database.db.Sequelize.STRING,
                 allowNull: false
                 // unique: true
@@ -25,4 +25,4 @@ class User {
     }
 }
 
-export default new User().model
+export default new Jogo().model
