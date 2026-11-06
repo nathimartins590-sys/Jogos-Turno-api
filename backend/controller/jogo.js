@@ -2,11 +2,11 @@ import ServiceJogo from '../service/jogo.js'
 
 class ControllerJogo {
 
-    async Buscar(_, res) {
+    async Buscar(req, res) {
         try {
-            const jogos = await ServiceJogo.Buscar()
+            const jogo = await ServiceJogo.Buscar()
 
-            res.status(200).send({ jogos })
+            res.status(200).send({ jogo })
         } catch (error) {
             res.status(500).send({ message: error.message })
         }
@@ -16,9 +16,9 @@ class ControllerJogo {
         try {
             // session === usuario logado
             const id = req.session.id
-            const jogos = await ServiceJogo.Detalhe(id)
+            const jogo = await ServiceJogo.Detalhe(id)
 
-            res.status(200).send({ jogos })
+            res.status(200).send({ jogo })
         } catch (error) {
             res.status(500).send({ message: error.message })
         }
@@ -30,7 +30,7 @@ class ControllerJogo {
 
             await ServiceJogo.Criar(descricao, data, vencedor)
 
-            res.status(201).send({ message: "Jogo criado com sucesso!" })
+            res.status(201).send({ message: "Usuário criado com sucesso!" })
         } catch (error) {
             res.status(500).send({ message: error.message })
         }
@@ -42,8 +42,8 @@ class ControllerJogo {
             const { descricao, data, vencedor } = req.body
 
             await ServiceJogo.Alterar(id, descricao, data, vencedor)
-        
-            res.status(200).send({ message: "Jogo alterado com sucesso!" })
+
+            res.status(200).send({ message: "Usuário alterado com sucesso!" })
         } catch (error) {
             res.status(500).send({ message: error.message })
         }
@@ -55,11 +55,10 @@ class ControllerJogo {
 
             await ServiceJogo.Deletar(id)
 
-            res.status(204).send({ message: "Jogo deletado com sucesso!" })
+            res.status(204).send({ message: "Usuário deletado com sucesso!" })
         } catch (error) {
             res.status(500).send({ message: error.message })
         }
     }
 }
-
 export default new ControllerJogo()
