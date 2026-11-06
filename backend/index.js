@@ -12,7 +12,7 @@ app.use('/api/v1/user', router)
 database.db.sync({ force: false })
     .then(() => {
         app.listen(3000, () => {
-            console.log("Servidor rodando na 3000")
+            console.log("Bah ta rodando 3000")
         })
     })
     .catch((e) => {
