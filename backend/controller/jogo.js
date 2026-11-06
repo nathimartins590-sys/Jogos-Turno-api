@@ -60,17 +60,5 @@ class ControllerJogo {
             res.status(500).send({ message: error.message })
         }
     }
-
-    async Login(req, res) {
-        try {
-            const { descricao, data, vencedor } = req.body
-
-            const token = await ServiceJogo.Login(descricao, data, vencedor)
-
-            res.status(200).send({ token })
-        } catch (error) {
-            res.status(500).send({ message: error.message })
-        }
-    }
 }
 export default new ControllerJogo()
