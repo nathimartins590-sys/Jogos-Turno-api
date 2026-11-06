@@ -21,7 +21,7 @@ class Jogo {
                 allowNull: false
                 // unique: true
             }
-        })        
+        })
     }
 }
 

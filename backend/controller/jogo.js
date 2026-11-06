@@ -26,9 +26,9 @@ class ControllerJogo {
 
     async Criar(req, res) {
         try {
-            const { name, email, password } = req.body
+            const { descricao, data, vencedor } = req.body
 
-            await ServiceJogo.Criar(name, email, password)
+            await ServiceJogo.Criar(descricao, data, vencedor)
 
             res.status(201).send({ message: "Usuário criado com sucesso!" })
         } catch (error) {
@@ -39,10 +39,10 @@ class ControllerJogo {
     async Alterar(req, res) {
         try {
             const id = req.session.id
-            const { name, email, password } = req.body
+            const { descricao, data, vencedor } = req.body
 
-            await ServiceJogo.Alterar(id, name, email, password)
-        
+            await ServiceJogo.Alterar(id, descricao, data, vencedor)
+
             res.status(200).send({ message: "Usuário alterado com sucesso!" })
         } catch (error) {
             res.status(500).send({ message: error.message })
@@ -63,9 +63,9 @@ class ControllerJogo {
 
     async Login(req, res) {
         try {
-            const { email, password } = req.body
-    
-            const token = await ServiceJogo.Login(email, password)
+            const { descricao, data, vencedor } = req.body
+
+            const token = await ServiceJogo.Login(descricao, data, vencedor)
 
             res.status(200).send({ token })
         } catch (error) {

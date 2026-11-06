@@ -9,84 +9,39 @@ class ServiceJogo {
 
     async Buscar() {
         return RepositoryJogo
-    .Buscar()
+            .Buscar()
     }
 
     async Detalhe(id) {
-        if(!id) {
+        if (!id) {
             throw new Error("Favor informar o ID")
         }
 
-        return RepositoryJogo
-    .Detalhe(id)
+        return RepositoryJogo.Detalhe(id)
     }
 
-    async Criar(name, email, password) {
-        if(!name || !email || !password) {
+    async Criar(descricao, data, vencedor) {
+        if (!descricao || !data || !vencedor) {
             throw new Error("Favor informar todos os parametros")
         }
-
-        const cryptPass = await bcrypt.hash(password, SALT)
-
-        await RepositoryJogo
-    .Criar(name, email, cryptPass)
+        await RepositoryJogo.Criar(descricao, data, vencedor)
     }
 
-    async Alterar(id, name, email, password) {
-        if(!id || !name || !email || !password) {
+    async Alterar(id, descricao, data, vencedor) {
+        if (!id || !descricao || !data || !vencedor) {
             throw new Error("Favor informar todos os parametros")
         }
-        
-        const cryptPass = !password
-            ? undefined
-            : await bcrypt.hash(password, SALT)
-
-        await RepositoryJogo
-    .Alterar(id, name, email, cryptPass)
+        const jogoalterar = await RepositoryJogo.update(id, descricao, data, vencedor)
+        return jogoalterar
     }
 
     async Deletar(id) {
-        if(!id) {
+        if (!id) {
             throw new Error("Favor informar o ID")
         }
 
-        await RepositoryJogo
-    .Deletar(id)
+        await RepositoryJogo.Deletar(id)
     }
-
-    async Login(email, password) {
-        if(!email || !password) {
-            throw new Error("Email ou senha inválido")
-        }
-
-        const Jogo
-     = await RepositoryJogo
-    .BuscarEmail(email)
-
-        if(
-            !Jogo
-         
-            || !(await bcrypt.compare(String(password), Jogo
-        .password))
-        ){
-            throw new Error("Email ou senha inválido")
-        }
-
-        // token
-        return jwt.sign(
-            {
-                id: Jogo
-            .id,
-                email: Jogo
-            .email
-            },
-            SECRET,
-            {
-                expiresIn: 60
-            }
-        )
-    }
-
 }
 
 export default new ServiceJogo()

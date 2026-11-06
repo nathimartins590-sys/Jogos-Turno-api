@@ -10,38 +10,31 @@ class RepositoryJogo {
         return jogo.findByPk(id)
     }
 
-    async BuscarEmail(email) {
-        return jogo.findOne({ where: { email } })
+    async Criar(descricao, data, vencedor) {
+        await jogo.create({ descricao, data, vencedor })
     }
 
-    async Criar(name, email, password) {
-        await jogo.create({ name, email, password })
-    }
-
-    async Alterar(id, name, email, password) {
+    async Alterar(id, descricao, data, vencedor) {
         const jogo = await jogo.findByPk(id)
-        
-        if(!jogo) {
+
+        if (!jogo) {
             throw new Error("Usuário não encontrado")
         }
 
-        jogo.name = name || jogo.name
-        jogo.email = email || jogo.email
-        jogo.password = password || jogo.password
+        jogo.descricao = descricao || jogo.descricao
+        jogo.data = data || jogo.data
+        jogo.vencedor = vencedor || jogo.vencedor
 
         await jogo.save()
     }
 
     async Deletar(id) {
         const jogo = await jogo.findByPk(id)
-        
-        if(!jogo) {
+
+        if (!jogo) {
             throw new Error("Usuário não encontrado")
         }
-
         await jogo.destroy()
     }
-
 }
-
 export default new RepositoryJogo()
