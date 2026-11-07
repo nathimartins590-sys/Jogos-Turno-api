@@ -1,15 +1,9 @@
 import RepositoryJogo from '../repository/jogo.js'
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-
-const SECRET = 'batata123'
-const SALT = 12
 
 class ServiceJogo {
 
     async Buscar() {
-        return RepositoryJogo
-            .Buscar()
+        return RepositoryJogo.Buscar()
     }
 
     async Detalhe(id) {
