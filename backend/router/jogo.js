@@ -1,12 +1,13 @@
 import express from "express"
-import ControllerJogo from "../controller/jogo.js"
+import ControllerUser from "../controller/jogo.js"
 
 const router = express.Router()
 
-router.get('/buscar', ControllerJogo.Buscar)
-router.get('/detalhe', ControllerJogo.Detalhe)
-router.post('/criar', ControllerJogo.Criar)
-router.put('/alterar', ControllerJogo.Alterar)
-router.delete('/deletar', ControllerJogo.Deletar)
+router.get('/status', ControllerUser.Buscar)
+router.get('/ataque', ControllerUser.Detalhe)
+router.post('/defesa', ControllerUser.Criar)
+router.put('/curar', ControllerUser.Alterar)
+router.delete('/deletar', ControllerUser.Deletar)
+// router.get('/resetar', Controller.Resetar)
 
 export default router

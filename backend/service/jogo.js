@@ -1,13 +1,19 @@
-import RepositoryJogo from "../repository/jogo.js"
+import RepositoryJogo from '../repository/jogo.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
+const SECRET = 'batata123'
+const SALT = 12
 
 class ServiceJogo {
 
     async Buscar() {
-        return RepositoryJogo.Buscar()
+        return RepositoryJogo
+            .Buscar()
     }
 
     async Detalhe(id) {
-        if(!id) {
+        if (!id) {
             throw new Error("Favor informar o ID")
         }
 
@@ -15,23 +21,22 @@ class ServiceJogo {
     }
 
     async Criar(descricao, data, vencedor) {
-        if(!descricao|| !data|| !vencedor) {
+        if (!descricao || !data || !vencedor) {
             throw new Error("Favor informar todos os parametros")
         }
-
         await RepositoryJogo.Criar(descricao, data, vencedor)
     }
 
     async Alterar(id, descricao, data, vencedor) {
-        if(!id || !descricao|| !data|| !vencedor) {
+        if (!id || !descricao || !data || !vencedor) {
             throw new Error("Favor informar todos os parametros")
         }
-
-        await RepositoryJogo.Alterar(id, descricao, data, vencedor)
+        const jogoalterar = await RepositoryJogo.update(id, descricao, data, vencedor)
+        return jogoalterar
     }
 
     async Deletar(id) {
-        if(!id) {
+        if (!id) {
             throw new Error("Favor informar o ID")
         }
 

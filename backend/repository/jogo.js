@@ -15,29 +15,26 @@ class RepositoryJogo {
     }
 
     async Alterar(id, descricao, data, vencedor) {
-        const jogos = await jogo.findByPk(id)
-        
-        if(!jogos) {
+        const jogo = await jogo.findByPk(id)
+
+        if (!jogo) {
             throw new Error("Usuário não encontrado")
         }
 
-        jogos.descricao = descricao || user.descricao
-        jogos.data = data || user.data
-        jogos.vencedor = vencedor || user.vencedor
+        jogo.descricao = descricao || jogo.descricao
+        jogo.data = data || jogo.data
+        jogo.vencedor = vencedor || jogo.vencedor
 
         await jogo.save()
     }
 
     async Deletar(id) {
-        const jogos = await jogo.findByPk(id)
-        
-        if(!jogos) {
-            throw new Error("Jogo não encontrado")
+        const jogo = await jogo.findByPk(id)
+
+        if (!jogo) {
+            throw new Error("Usuário não encontrado")
         }
-
-        await jogos.destroy()
+        await jogo.destroy()
     }
-
 }
-
 export default new RepositoryJogo()
