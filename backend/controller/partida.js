@@ -1,6 +1,6 @@
 class ControllerGame {
     Status(_, res) {
-        const resultado = ServicePartida.DanoBase()
+        const resultado = ServicePartida.Status()
         res.send(resultado)
     }
 
