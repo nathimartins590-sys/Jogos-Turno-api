@@ -1,14 +1,15 @@
-export const campeao = {
-    hpbase: 150,
-    hp: 100,
-    ataque: 20,
-    curar : 20,
-    defesa : 15
+export const campeaoInicial = {
+    hpBase: 300,
+    hp: 300,
+    ataque: 18,
+    curar: 80,
+    defesa: 10,
 }
-export const monstro = {
-    hpbase: 200,
+
+export const monstroInicial = {
+    hpBase: 200,
     hp: 200,
-    dano: 30 ,
-    curar : 30,
-    defesa : 20
+    danoBase: 25,
+    curar: 50,
+    defesa: 5,
 }
